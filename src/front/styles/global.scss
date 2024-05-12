@@ -1,0 +1,29 @@
+h1 {
+    font-family: $secondary-font;
+}
+
+body {
+    font-family: $primary-font;
+}
+
+.fixed-height-card {
+    height: 300px; /* Establece la altura fija que desees */
+    overflow: auto; /* Agrega un desplazamiento si el contenido excede la altura */
+}
+
+.footer {
+    .fab {
+        color: $primary-color;
+    }
+}
+
+.btn {
+    background-color: $primary-color;
+    border: none;
+}
+
+
+
+.nav-link {
+    color: $primary-color;
+}

@@ -1,0 +1,22 @@
+.card-container {
+padding-left: 20%;
+padding-right: 20%;
+z-index: 1;
+
+    .card {
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+}
+
+h1 {
+    padding-bottom: 40px;
+}
+
+h2 {
+    padding-top: 40px;
+    padding-bottom: 20px;
+}

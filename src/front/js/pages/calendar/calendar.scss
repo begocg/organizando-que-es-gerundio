@@ -1,0 +1,60 @@
+.rbc-header {
+    font-size: 14px !important;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    height: 36px !important;
+    background-color: $primary-color;
+}
+
+.rbc-allday-cell {
+    display: none;
+}
+
+.rbc-time-header-cell .rbc-today {
+    background-color: $secondary-color !important;
+}
+
+.rbc-time-slot {
+    color: $primary-color;
+    z-index: 1;
+    background-color: white;
+    
+}
+
+
+.rbc-time-slot:not(.rbc-today .rbc-time-slot) {
+    background-color: white;
+}
+
+.rbc-event,
+.rbc-background-event {
+z-index: 2;
+padding: 0px !important;
+border: none !important;
+}
+
+.rbc-event-label {
+    display: none !important;
+}
+
+.rbc-events-container {
+    width: 100%;
+}
+
+.rbc-button-link{
+    padding-top: 5px !important;
+}
+
+.custom-toolbar {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 999; /* Asegura que la barra de herramientas esté sobre el calendario */
+  }
+  
+  .custom-datepicker {
+ 
+    z-index: 1000; /* Asegura que el selector de fecha esté sobre la barra de herramientas y el calendario */
+  }
+
