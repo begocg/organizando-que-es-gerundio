@@ -7,6 +7,9 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import psycopg2
 from flask_jwt_extended import create_access_token
+from functools import wraps
+import jwt
+import app
 
 api = Blueprint('api', __name__)
 
@@ -20,6 +23,23 @@ conn = psycopg2.connect(
     host="localhost"
 )
 cur = conn.cursor()
+
+# def token_required(f):
+#     @wraps(f)
+#     def decorated(*args, **kwargs):
+#         token = request.headers.get('Authorization')
+
+#         if not token:
+#             return jsonify({'message': 'Token is missing'}), 401
+
+#         try:
+#             data = jwt.decode(token, app.config['SECRET_KEY'])
+#         except:
+#             return jsonify({'message': 'Token is invalid'}), 401
+
+#         return f(*args, **kwargs)
+
+#     return decorated
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
@@ -81,9 +101,15 @@ def get_user_tasks(userId):
     return jsonify({"message": f"Get tasks for user with ID {userId}"}), 200
 
 @api.route('/tasks/<int:userId>', methods=['POST'])
+# @token_required
 def create_task(userId):
     data = request.json
-    # Lógica para crear una nueva tarea para un usuario
+    description = data.get('description')
+    duration = data.get('duration')
+    deadline = data.get('deadline')
+    type = data.get('type')
+    cur.execute("INSERT INTO tasks (description, duration, deadline, type) VALUES (%s, %s, %s, %s)", (description, duration, deadline, type))
+    conn.commit()
     return jsonify({"message": f"Create task for user with ID {userId}", "description": data.get("description"), "duration": data.get("duration"), "deadline": data.get("deadline"), "type": data.get("type")}), 201
 
 @api.route('/tasks/<int:userId>/<int:taskId>', methods=['GET'])
