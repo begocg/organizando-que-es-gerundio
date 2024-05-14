@@ -7,8 +7,11 @@ import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "dayjs/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
+import { Modal } from "react-bootstrap";
 
-import NewTask from "../../component/newTask";
+
+
+import EditTask from "../../component/editTask";
 
 dayjs.locale("es");
 
@@ -17,13 +20,14 @@ export const MyCalendar = () => {
   const localizer = dayjsLocalizer(dayjs);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [events, setEvents] = useState([]);
+  const [showNewTaskModal, setShowNewTaskModal] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null); // Estado para almacenar la tarea seleccionada
+
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch(
-          "https://7q5hgfs0-3001.uks1.devtunnels.ms/api/tasks/" + userId
-        );
+        const response = await fetch("https://7q5hgfs0-3001.uks1.devtunnels.ms/api/tasks/" + userId);
         if (response.ok) {
           const data = await response.json();
           const listaEventos = data.map((task) => {
@@ -32,7 +36,8 @@ export const MyCalendar = () => {
             return {
               title: task.description,
               start: dayjs(deadlineDate).toDate(),
-              end: dayjs(new Date(task.deadline)).toDate()
+              end: dayjs(new Date(task.deadline)).toDate(),
+              data: {taskId: task.taskId}
             };
           });
           setEvents(listaEventos);
@@ -51,23 +56,33 @@ export const MyCalendar = () => {
     setSelectedDate(date);
   };
 
+  const handleEventClick = async (event) => { // Modificamos para obtener los detalles de la tarea
+    try {
+      const taskId = event.data.taskId;
+      const response = await fetch(`https://7q5hgfs0-3001.uks1.devtunnels.ms/api/tasks/${userId}/${taskId}`);
+      if (response.ok) {
+        const taskData = await response.json();
+        setSelectedTask(taskData); // Almacenamos los detalles de la tarea seleccionada
+        setShowNewTaskModal(true);
+      } else {
+        console.error("Error al obtener los detalles de la tarea");
+      }
+    } catch (error) {
+      console.error("Error en la solicitud:", error);
+    }
+  };
+
   return (
     <div
       style={{
         height: 500,
         width: "100%",
         paddingLeft: "5%",
-        paddingRight: "5%"
+        paddingRight: "5%",
       }}
     >
       <div className="custom-toolbar">
-        <DatePicker
-          selected={selectedDate}
-          onChange={handleDateChange}
-          dateFormat="dd/MM/yyyy"
-          locale={es}
-          className="custom-datepicker"
-        />
+        <DatePicker selected={selectedDate} onChange={handleDateChange} dateFormat="dd/MM/yyyy" locale={es} className="custom-datepicker" />
       </div>
       <Calendar
         localizer={localizer}
@@ -79,12 +94,13 @@ export const MyCalendar = () => {
         formats={{
           dayHeaderFormat: (date) => {
             return dayjs(date).format("dddd, DD/MM");
-          }
+          },
         }}
         date={selectedDate}
         onNavigate={(newDate, view) => {
           setSelectedDate(newDate);
         }}
+        onSelectEvent={handleEventClick}
         messages={{
           allDay: "Todo el día",
           previous: "Anterior",
@@ -97,10 +113,24 @@ export const MyCalendar = () => {
           date: "Fecha",
           time: "Hora",
           event: "Evento",
-          noEventsInRange: "Sin eventos"
+          noEventsInRange: "Sin eventos",
         }}
-
       />
+
+      {/* Modal para mostrar el formulario de nueva tarea */}
+      <Modal show={showNewTaskModal} onHide={() => setShowNewTaskModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Nueva Tarea</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <EditTask initialTask={selectedTask}/>
+        </Modal.Body>
+        <Modal.Footer>
+          {/* Puedes añadir botones de acción en el pie del modal si es necesario */}
+        </Modal.Footer>
+      </Modal>
+
+
     </div>
   );
 };
