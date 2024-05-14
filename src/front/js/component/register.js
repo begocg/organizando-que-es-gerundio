@@ -21,6 +21,9 @@ const Register = ({ onRegistrationSuccess }) => {
                 }),
             });
             if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem("jwt-token", data.token);
+                localStorage.setItem("userId", data.userId);
                 onRegistrationSuccess();
             } else {
                 // La solicitud falló, mostramos un mensaje de error

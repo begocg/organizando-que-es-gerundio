@@ -97,8 +97,13 @@ def delete_user(userId):
 
 @api.route('/tasks/<int:userId>', methods=['GET'])
 def get_user_tasks(userId):
-
-    return jsonify({"message": f"Get tasks for user with ID {userId}"}), 200
+    listaTareas=[]
+    cur.execute('SELECT * FROM tasks where "userId"= %s',(userId,))
+    tasks = cur.fetchall()
+    
+    for task in tasks:
+        listaTareas.append({"description": task[2], "deadline": task[4], "duration" : task[3], "taskId": task[0], "type": task[5]})
+    return jsonify(listaTareas), 200
 
 @api.route('/tasks/<int:userId>', methods=['POST'])
 # @token_required
@@ -108,7 +113,7 @@ def create_task(userId):
     duration = data.get('duration')
     deadline = data.get('deadline')
     type = data.get('type')
-    cur.execute("INSERT INTO tasks (description, duration, deadline, type) VALUES (%s, %s, %s, %s)", (description, duration, deadline, type))
+    cur.execute('INSERT INTO tasks ("userId", description, duration, deadline, type) VALUES (%s, %s, %s, %s, %s)', (userId, description, duration, deadline, type))
     conn.commit()
     return jsonify({"message": f"Create task for user with ID {userId}", "description": data.get("description"), "duration": data.get("duration"), "deadline": data.get("deadline"), "type": data.get("type")}), 201
 
