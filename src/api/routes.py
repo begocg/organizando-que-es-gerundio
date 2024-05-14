@@ -119,15 +119,27 @@ def create_task(userId):
 
 @api.route('/tasks/<int:userId>/<int:taskId>', methods=['GET'])
 def get_task(userId, taskId):
-    # Lógica para obtener la información de una tarea
-    return jsonify({"message": f"Get task with ID {taskId} for user with ID {userId}"}), 200
+    cur.execute('SELECT * FROM tasks where "userId"= %s AND "taskId"= %s',(userId, taskId))
+    task = cur.fetchone()
+    
+    if (task):
+        return jsonify({"description": task[2], "deadline": task[4], "duration" : task[3], "taskId": task[0], "type": task[5]}), 200
+    else:
+        return jsonify({"error": "Error al capturar la tarea"}), 401
 
-@api.route('/tasks/<int:taskId>', methods=['PUT'])
-def update_task(taskId):
-    # Lógica para editar la información de una tarea
-    return jsonify({"message": f"Update task with ID {taskId}"}), 200
 
-@api.route('/tasks/<int:taskId>', methods=['DELETE'])
-def delete_task(taskId):
-    # Lógica para eliminar una tarea
+@api.route('/tasks/<int:userId>/<int:taskId>', methods=['PUT'])
+def update_task(userId, taskId):
+    data = request.json
+    cur.execute('UPDATE tasks SET description=%s, deadline=%s, duration=%s, type=%s WHERE "userId"=%s AND "taskId"=%s',
+                    (data.get('description'), data.get('deadline'), data.get('duration'), data.get('type'), userId, taskId))
+    conn.commit()
+    return jsonify({"data": data}), 200
+    
+
+@api.route('/tasks/<int:userId>/<int:taskId>', methods=['DELETE'])
+def delete_task(userId, taskId):
+    cur.execute('DELETE from tasks WHERE "userId"=%s AND "taskId"=%s', (userId, taskId))
+    conn.commit()
+
     return jsonify({"message": f"Task with ID {taskId} deleted"}), 200
