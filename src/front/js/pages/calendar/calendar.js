@@ -62,7 +62,8 @@ export const MyCalendar = () => {
       const response = await fetch(`https://7q5hgfs0-3001.uks1.devtunnels.ms/api/tasks/${userId}/${taskId}`);
       if (response.ok) {
         const taskData = await response.json();
-        setSelectedTask(taskData); // Almacenamos los detalles de la tarea seleccionada
+        setSelectedTask(taskData);
+        console.log(taskData) // Almacenamos los detalles de la tarea seleccionada
         setShowNewTaskModal(true);
       } else {
         console.error("Error al obtener los detalles de la tarea");

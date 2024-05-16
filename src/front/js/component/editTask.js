@@ -26,15 +26,15 @@ const EditTask = ({ initialTask }) => {
         },
         body: JSON.stringify({
           userId: userId,
-          description: task.name,
+          description: task.description,
           duration: taskDuration,
-          deadline: task.endDate,
-          type: task.priority,
+          deadline: task.deadline,
+          type: task.type,
         }),
       });
       if (response.ok) {
         console.log(response.json());
-        window.location.href = "/calendar";
+/*         window.location.href = "/calendar"; */
       } else {
         // La solicitud falló, mostramos un mensaje de error
         console.error("No se pudo registrar. Inténtelo de nuevo más tarde.");
@@ -54,6 +54,7 @@ const EditTask = ({ initialTask }) => {
     try {
       const userId = localStorage.getItem("userId");
       const taskId = task.taskId;
+
       const response = await fetch("https://7q5hgfs0-3001.uks1.devtunnels.ms/api/tasks/" + userId + "/" + taskId, {
         method: "DELETE",
       });
@@ -80,11 +81,11 @@ const EditTask = ({ initialTask }) => {
       <form onSubmit={handleSubmit}>
         <label>
           Nombre de la tarea:
-          <input type="text" name="name" defaultValue={task.description} onChange={handleChange} required />
+          <input type="text" name="description" defaultValue={task.description} onChange={handleChange} required />
         </label>
         <label>
           Fecha de fin:
-          <input type="datetime-local" name="endDate" defaultValue={formatDateForInput(task.deadline)} onChange={handleChange} required />
+          <input type="datetime-local" name="deadline" defaultValue={formatDateForInput(task.deadline)} onChange={handleChange} required />
         </label>
         <label>
           Duración:
@@ -105,11 +106,13 @@ const EditTask = ({ initialTask }) => {
           </label>
         )}
         <label>
-          <input type="checkbox" name="priority" defaultChecked={task.priority} onChange={() => setTask({ ...task, priority: !task.priority })} />
+          <input type="checkbox" name="type" defaultChecked={task.type} onChange={() => setTask({ ...task, type: !task.type })} />
           Prioridad
         </label>
         <button type="submit">Guardar tarea</button>
-        <button type="button" onClick={handleDelete} >Borrar</button>
+        <button type="button" onClick={handleDelete}>
+          Borrar
+        </button>
       </form>
     </>
   );
