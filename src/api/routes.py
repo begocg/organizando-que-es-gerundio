@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from src.api.models import db, User
 from src.api.utils import generate_sitemap, APIException
 from flask_cors import CORS
-import psycopg2
+#import psycopg2
 from flask_jwt_extended import create_access_token
 from functools import wraps
 import jwt
