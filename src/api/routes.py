@@ -17,10 +17,6 @@ api = Blueprint('api', __name__)
 CORS(api)
 
 conn = psycopg2.connect(
-    dbname="example_f4zm",
-    user="begocg",
-    password="PTzHQfYBqPxB3qWPEBvAJo7XNLWsF9Wf",
-    host="dpg-cp3n8qvsc6pc73fscc00-a",
     sslmode='require'
 )
 cur = conn.cursor()
