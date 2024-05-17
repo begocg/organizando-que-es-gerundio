@@ -17,7 +17,7 @@ api = Blueprint('api', __name__)
 CORS(api)
 
 conn = psycopg2.connect(
-    "postgres://begocg:PTzHQfYBqPxB3qWPEBvAJo7XNLWsF9Wf@dpg-cp3n8qvsc6pc73fscc00-a/example_f4zm",
+    "postgres://begocg:PTzHQfYBqPxB3qWPEBvAJo7XNLWsF9Wf@dpg-cp3n8qvsc6pc73fscc00-a.oregon-postgres.render.com/example_f4zm",
     sslmode='require'
 )
 cur = conn.cursor()
