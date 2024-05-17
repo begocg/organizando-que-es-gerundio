@@ -16,10 +16,10 @@ api = Blueprint('api', __name__)
 # Allow CORS requests to this API
 CORS(api)
 
-conn = psycopg2.connect(
-    "postgres://begocg:PTzHQfYBqPxB3qWPEBvAJo7XNLWsF9Wf@dpg-cp3n8qvsc6pc73fscc00-a.oregon-postgres.render.com/example_f4zm"
-)
-cur = conn.cursor()
+# conn = psycopg2.connect(
+#     "postgres://begocg:PTzHQfYBqPxB3qWPEBvAJo7XNLWsF9Wf@dpg-cp3n8qvsc6pc73fscc00-a.oregon-postgres.render.com/example_f4zm"
+# )
+# cur = conn.cursor()
 
 # def token_required(f):
 #     @wraps(f)
