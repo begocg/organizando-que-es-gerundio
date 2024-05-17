@@ -8,18 +8,18 @@ from flask_cors import CORS
 import psycopg2
 from flask_jwt_extended import create_access_token
 from functools import wraps
-import jwt
-import app
+#import jwt
+#import app
 
 api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
 CORS(api)
 
-# conn = psycopg2.connect(
-#     "postgres://begocg:PTzHQfYBqPxB3qWPEBvAJo7XNLWsF9Wf@dpg-cp3n8qvsc6pc73fscc00-a.oregon-postgres.render.com/example_f4zm"
-# )
-# cur = conn.cursor()
+conn = psycopg2.connect(
+     "postgres://begocg:PTzHQfYBqPxB3qWPEBvAJo7XNLWsF9Wf@dpg-cp3n8qvsc6pc73fscc00-a.oregon-postgres.render.com/example_f4zm"
+ )
+cur = conn.cursor()
 
 # def token_required(f):
 #     @wraps(f)
