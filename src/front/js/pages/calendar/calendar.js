@@ -27,7 +27,7 @@ export const MyCalendar = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch("https://7q5hgfs0-3001.uks1.devtunnels.ms/api/tasks/" + userId);
+        const response = await fetch("https://organizando-que-es-gerundio.onrender.com/api/tasks/" + userId);
         if (response.ok) {
           const data = await response.json();
           const listaEventos = data.map((task) => {
@@ -59,7 +59,7 @@ export const MyCalendar = () => {
   const handleEventClick = async (event) => { // Modificamos para obtener los detalles de la tarea
     try {
       const taskId = event.data.taskId;
-      const response = await fetch(`https://7q5hgfs0-3001.uks1.devtunnels.ms/api/tasks/${userId}/${taskId}`);
+      const response = await fetch(`https://organizando-que-es-gerundio.onrender.com/api/tasks/${userId}/${taskId}`);
       if (response.ok) {
         const taskData = await response.json();
         setSelectedTask(taskData);

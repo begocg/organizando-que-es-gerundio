@@ -9,7 +9,7 @@ const Register = ({ onRegistrationSuccess }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('https://7q5hgfs0-3001.uks1.devtunnels.ms/api/users', {
+            const response = await fetch('https://organizando-que-es-gerundio.onrender.com/api/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
