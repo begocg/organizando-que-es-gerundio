@@ -58,12 +58,18 @@ def register():
     existing_user = cur.fetchone()
     if existing_user:
         return jsonify({"error": "El usuario ya existe"}), 400
+    else:
+    # Crea un nuevo usuario 
+        cur.execute("INSERT INTO users (username, email, password) VALUES (%s, %s, %s)", (username, email, password))
+        conn.commit()
+        cur.execute("SELECT * FROM users WHERE username = %s AND password= %s", (username,password))
+        user = cur.fetchone()
+        if user:
+            token = create_access_token(identity=username)
+            return jsonify({ "token": token, "username": username, "userId": user[0] }), 201
+        else:
+            return jsonify({"error": "Error en la creación del usuario"}), 400
 
-    # Crea un nuevo usuario
-    cur.execute("INSERT INTO users (username, email, password) VALUES (%s, %s, %s)", (username, email, password))
-    conn.commit()
-
-    return jsonify({"message": "Usuario registrado exitosamente"}), 201
    
 
 
