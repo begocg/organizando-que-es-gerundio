@@ -99,7 +99,7 @@ def get_user_tasks(userId):
     tasks = cur.fetchall()
     
     for task in tasks:
-        listaTareas.append({"description": task[2], "deadline": task[4], "duration" : task[3], "taskId": task[0], "type": task[5]})
+        listaTareas.append({"description": str(task[2]), "deadline": task[4], "duration" : float(task[3]), "taskId": int(task[0]), "type": bool(task[5])})
     return jsonify(listaTareas), 200
 
 @api.route('/tasks/<int:userId>', methods=['POST'])
