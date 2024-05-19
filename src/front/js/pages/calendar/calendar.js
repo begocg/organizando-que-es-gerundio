@@ -34,10 +34,12 @@ export const MyCalendar = () => {
             const deadlineDate = new Date(task.deadline);
             deadlineDate.setHours(deadlineDate.getHours() - 2);
             deadlineDate.setHours(deadlineDate.getHours() - task.duration);
+            const endate = new Date(task.deadline);
+            endate.setHours(deadlineDate.getHours() - 2);
             return {
               title: task.description,
               start: dayjs(deadlineDate).toDate(),
-              end: dayjs(new Date(task.deadline)).toDate(),
+              end: dayjs(endate).toDate(),
               data: {taskId: task.taskId}
             };
           });
