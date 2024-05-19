@@ -28,7 +28,7 @@ const EditTask = ({ initialTask }) => {
           userId: userId,
           description: task.description,
           duration: taskDuration,
-          deadline: task.deadline,
+          deadline: task.deadline - 2,
           type: task.type,
         }),
       });

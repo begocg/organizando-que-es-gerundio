@@ -36,7 +36,7 @@ const NewTask = () => {
                     userId: userId,
                     description: task.name,
                     duration: taskDuration,
-                    deadline: task.endDate,
+                    deadline: task.endDate - 2,
                     type: task.priority
                 }),
             });
