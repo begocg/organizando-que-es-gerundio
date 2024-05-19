@@ -52,6 +52,7 @@ const NewTask = () => {
                     wordsPerHour: '',
                     priority: false
                 });
+                window.location.href = "/calendar";
             } else {
                 // La solicitud falló, mostramos un mensaje de error
                 console.error("No se pudo registrar. Inténtelo de nuevo más tarde.");

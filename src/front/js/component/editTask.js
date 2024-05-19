@@ -34,7 +34,7 @@ const EditTask = ({ initialTask }) => {
       });
       if (response.ok) {
         console.log(response.json());
-/*         window.location.href = "/calendar"; */
+         window.location.href = "/calendar";
       } else {
         // La solicitud falló, mostramos un mensaje de error
         console.error("No se pudo registrar. Inténtelo de nuevo más tarde.");
