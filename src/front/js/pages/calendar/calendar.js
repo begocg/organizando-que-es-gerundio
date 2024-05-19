@@ -31,7 +31,7 @@ export const MyCalendar = () => {
         if (response.ok) {
           const data = await response.json();
           const listaEventos = data.map((task) => {
-            const deadlineDate = new Date(task.deadline);
+            const deadlineDate = new Date(task.deadline)-2;
             deadlineDate.setHours(deadlineDate.getHours() - task.duration);
             return {
               title: task.description,
