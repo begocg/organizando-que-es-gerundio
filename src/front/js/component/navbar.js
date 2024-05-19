@@ -30,7 +30,7 @@ export const Navbar = () => {
   const handleNewTask = () => {};
 
   const handleLogoutSuccess = () => {
-    window.location.href = "/";
+    window.location.href = "/home";
     localStorage.clear();
   };
   const token = localStorage.getItem("jwt-token");
