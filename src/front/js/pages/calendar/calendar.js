@@ -35,7 +35,7 @@ export const MyCalendar = () => {
             deadlineDate.setHours(deadlineDate.getHours() - 2);
             deadlineDate.setHours(deadlineDate.getHours() - task.duration);
             const endate = new Date(task.deadline);
-            endate.setHours(deadlineDate.getHours() - 2);
+            endate.setHours(endate.getHours() - 2);
             return {
               title: task.description,
               start: dayjs(deadlineDate).toDate(),
