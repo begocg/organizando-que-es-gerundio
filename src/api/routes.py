@@ -120,7 +120,7 @@ def get_task(userId, taskId):
     task = cur.fetchone()
     
     if (task):
-        return jsonify({"description": task[2], "deadline": task[4], "duration" : task[3], "taskId": task[0], "type": task[5]}), 200
+        return jsonify({"description": str(task[2]), "deadline": task[4], "duration" : float(task[3]), "taskId": int(task[0]), "type": bool(task[5])}), 200
     else:
         return jsonify({"error": "Error al capturar la tarea"}), 401
 
