@@ -27,6 +27,7 @@ const NewTask = () => {
         }
         try {
             const userId = localStorage.getItem("userId");
+            const dateForDateTimeInputValue = date => new Date(date.getTime() + new Date().getTimezoneOffset() * -60 * 1000).toISOString().slice(0, 19)
             const response = await fetch('https://organizando-que-es-gerundio.onrender.com/api/tasks/' + userId, {
                 method: 'POST',
                 headers: {
@@ -36,7 +37,7 @@ const NewTask = () => {
                     userId: userId,
                     description: task.name,
                     duration: taskDuration,
-                    deadline: task.endDate - 2,
+                    deadline: task.endDate,
                     type: task.priority
                 }),
             });
