@@ -77,7 +77,6 @@ const EditTask = ({ initialTask }) => {
   };
   return (
     <>
-      <h2>Holaaaaaaaaaaaaaaaa:{task.description}</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Nombre de la tarea:
