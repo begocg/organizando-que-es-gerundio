@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../../store/appContext";
+import { Link } from "react-router-dom";
 import "../../../styles/index.scss";
 import "reactjs-popup/dist/index.css";
 import homePage from "../../../img/homePage.png";
