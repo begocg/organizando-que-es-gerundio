@@ -41,15 +41,14 @@ export const Navbar = () => {
     return (
       <nav className="navbar navbar-light">
         <div className="container">
-        <div className="d-flex flex-column align-items-center w-100">
-            <div className="d-flex align-items-center justify-content-center mb-3">
+          <div className="d-flex align-items-center">
           <Link to="/calendar">
             <img src={logo} alt="Logo" onClick={() => scrollToSection("inicio")} style={{ marginRight: "10px", width: "50px", height: "auto" }} />
             </Link>
             <p>Organizando que es gerundio</p>
           </div>
 
-          <div className="ml-auto d-flex justify-content-center mb-3">
+          <div className="ml-auto">
             <Popup
               trigger={
                 <button
@@ -69,7 +68,6 @@ export const Navbar = () => {
             <button onClick={handleLogoutSuccess} className="btn btn-primary">
               Logout
             </button>
-            </div>
           </div>
         </div>
       </nav>
@@ -78,14 +76,13 @@ export const Navbar = () => {
     return (
       <nav className="navbar navbar-light">
         <div className="container">
-          <div className="d-flex flex-column align-items-center w-100">
-          <div className="d-flex align-items-center justify-content-center mb-3">
+          <div className="d-flex align-items-center">
           <Link to="/home">
             <img src={logo} alt="Logo" onClick={() => scrollToSection("inicio")} style={{ marginRight: "10px", width: "50px", height: "auto" }} />
             </Link>
             <p>Organizando que es gerundio</p>
           </div>
-          <div className="d-flex flex-column align-items-center w-100 mb-3 ml auto">
+          <div className="d-flex align-items-center ml-auto">
             <span className="nav-link" onClick={() => scrollToSection("caracteristicas")}>
               Características
             </span>
@@ -96,7 +93,7 @@ export const Navbar = () => {
               Asistencia
             </span>
           </div>
-          <div className="ml-auto d-flex justify-content-center">
+          <div className="ml-auto">
             <Popup
               trigger={
                 <button className="btn btn-primary" style={{ marginRight: "10px" }}>
@@ -109,7 +106,6 @@ export const Navbar = () => {
             <Popup trigger={<button className="btn btn-primary">Registrarse</button>}>
               <Register onRegistrationSuccess={handleRegistrationSuccess} />{" "}
             </Popup>
-            </div>
           </div>
         </div>
       </nav>
