@@ -30,7 +30,7 @@ h2 {
   
     .contact-text-left {
       flex: 1;
-      max-width: 40%;  // Limita el ancho del texto en pantallas grandes
+      width: 40%;  // Limita el ancho del texto en pantallas grandes
     }
   
     form {
@@ -43,10 +43,10 @@ h2 {
     @media (max-width: 768px) {
       flex-direction: column;
   
-      .contact-text-left, form {
-        width: 100%;  // Elimina el límite de ancho para pantallas pequeñas
-      }
+      .contact-form {
+        width: 100%
     }
-  }
+    }  
+}
   
   
