@@ -42,7 +42,7 @@ export const Navbar = () => {
       <nav className="navbar navbar-light">
         <div className="container">
           <div className="d-flex align-items-center">
-          <Link to="/home">
+          <Link to="/calendar">
             <img src={logo} alt="Logo" onClick={() => scrollToSection("inicio")} style={{ marginRight: "10px", width: "50px", height: "auto" }} />
             </Link>
             <p>Organizando que es gerundio</p>
@@ -77,7 +77,7 @@ export const Navbar = () => {
       <nav className="navbar navbar-light">
         <div className="container">
           <div className="d-flex align-items-center">
-          <Link to="/calendar">
+          <Link to="/home">
             <img src={logo} alt="Logo" onClick={() => scrollToSection("inicio")} style={{ marginRight: "10px", width: "50px", height: "auto" }} />
             </Link>
             <p>Organizando que es gerundio</p>

@@ -20,3 +20,43 @@ h2 {
     padding-top: 40px;
     padding-bottom: 20px;
 }
+.contact-form {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;  // Espacio entre el texto y el formulario
+    padding: 20px;  // Añadir un poco de padding para mejor apariencia
+    flex-wrap: wrap;
+  
+    .contact-text-left {
+      flex: 1;
+      max-width: 40%;  // Limita el ancho del texto en pantallas grandes
+    }
+  
+    form {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;  // Espacio entre los campos del formulario
+    }
+  
+    @media (max-width: 768px) {
+      flex-direction: column;
+  
+      .contact-text-left, form {
+        max-width: 100%;  // Elimina el límite de ancho para pantallas pequeñas
+      }
+    }
+  }
+  
+.homepage-image {
+    width: 1000px;
+    height: auto;
+  
+    @media (max-width: 768px) {
+      content: url('../../../img/homePageMobile.png');
+      width: 100%;
+      height: auto;
+    }
+  }
+  

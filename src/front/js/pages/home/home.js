@@ -13,7 +13,7 @@ export const Home = () => {
     <div className="text-center mt-5">
       <div className="h1-container">
         <h1>Descubre por qué necesitas Organizando que es gerundio en tu día a día</h1>
-        <img src={homePage} style={{ width: "1000px", height: "auto" }} />
+        <img src={homePage} className="homepage-image"/>
       </div>
       <h2 id="caracteristicas">Características</h2>
       <div className="card-container row justify-content-center text-center">
