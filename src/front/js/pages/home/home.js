@@ -56,7 +56,9 @@ export const Home = () => {
             <li>Proyectos ilimitados</li>
             <li>Almacenamiento por 1 año</li>
           </ul>
-          <button className="btn btn-primary">Empieza ya</button>
+          <Link to="/notfound">
+            <button className="btn btn-primary">Empieza ya</button>
+          </Link>
         </div>
         <div class="flex_content">
           <h2>Profesional</h2>
@@ -67,7 +69,9 @@ export const Home = () => {
             <li>15 días gratis</li>
             <li>Almacenamiento por 3 años</li>
           </ul>
-          <button className="btn btn-primary">Pruébalo</button>
+          <Link to="/notfound">
+            <button className="btn btn-primary">Pruébalo</button>
+          </Link>
         </div>
       </div>
       <h2 id="asistencia">Asistencia</h2>
@@ -77,7 +81,9 @@ export const Home = () => {
           <input type="text" placeholder="Nombre" />
           <input type="email" placeholder="Correo electrónico" />
           <textarea placeholder="Mensaje"></textarea>
+          <Link to="/notfound">
           <button className="btn btn-primary" type="submit">Enviar</button>
+          </Link>
         </form>
       </div>
     </div>
