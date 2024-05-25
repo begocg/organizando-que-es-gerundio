@@ -7,6 +7,7 @@ import { Home } from "./pages/home/home";
 import { MyCalendar } from "./pages/calendar/calendar"
 import { Profile } from "./pages/profile/profile"
 import injectContext from "./store/appContext";
+import { Blank } from "./pages/blank";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
