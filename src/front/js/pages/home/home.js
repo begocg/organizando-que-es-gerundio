@@ -18,7 +18,7 @@ export const Home = () => {
         <h1>Descubre por qué necesitas Organizando que es gerundio en tu día a día</h1>
         <img 
           src={isMobile ? homePageMobile : homePage} 
-          style={{ width: "1000px", height: "auto" }}
+          style={{ width: "80%", height: "auto" }}
           alt="Dibujo de una chica con un ordenador y alrededor de ella hay iconos de tareas, relojes, etc."
         />
       </div>

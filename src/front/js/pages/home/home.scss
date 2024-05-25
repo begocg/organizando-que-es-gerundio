@@ -44,7 +44,7 @@ h2 {
       flex-direction: column;
   
       .contact-text-left, form {
-        max-width: 100%;  // Elimina el límite de ancho para pantallas pequeñas
+        width: 100%;  // Elimina el límite de ancho para pantallas pequeñas
       }
     }
   }
