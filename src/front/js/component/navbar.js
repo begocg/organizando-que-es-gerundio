@@ -6,6 +6,7 @@ import Login from "./login";
 import Popup from "./pop-up/pop-up";
 import Register from "./register";
 import NewTask from "./newTask";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   const scrollToSection = (sectionId) => {
@@ -41,7 +42,9 @@ export const Navbar = () => {
       <nav className="navbar navbar-light">
         <div className="container">
           <div className="d-flex align-items-center">
+          <Link to="/home">
             <img src={logo} alt="Logo" onClick={() => scrollToSection("inicio")} style={{ marginRight: "10px", width: "50px", height: "auto" }} />
+            </Link>
             <p>Organizando que es gerundio</p>
           </div>
 
@@ -74,7 +77,9 @@ export const Navbar = () => {
       <nav className="navbar navbar-light">
         <div className="container">
           <div className="d-flex align-items-center">
+          <Link to="/calendar">
             <img src={logo} alt="Logo" onClick={() => scrollToSection("inicio")} style={{ marginRight: "10px", width: "50px", height: "auto" }} />
+            </Link>
             <p>Organizando que es gerundio</p>
           </div>
           <div className="d-flex align-items-center ml-auto">
