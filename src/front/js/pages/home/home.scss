@@ -49,14 +49,4 @@ h2 {
     }
   }
   
-.homepage-image {
-    width: 1000px;
-    height: auto;
-  
-    @media (max-width: 768px) {
-      content: url('../../../img/homePageMobile.png');
-      width: 100%;
-      height: auto;
-    }
-  }
   

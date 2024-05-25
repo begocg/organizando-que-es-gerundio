@@ -4,16 +4,23 @@ import { Link } from "react-router-dom";
 import "../../../styles/index.scss";
 import "reactjs-popup/dist/index.css";
 import homePage from "../../../img/homePage.png";
+import homePageMobile from "../../../img/homePageMobile.png";
 import Card from "../../component/card";
+import { useMediaQuery } from 'react-responsive';
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
   return (
     <div className="text-center mt-5">
       <div className="h1-container">
         <h1>Descubre por qué necesitas Organizando que es gerundio en tu día a día</h1>
-        <img src={homePage} className="homepage-image"/>
+        <img 
+          src={isMobile ? homePageMobile : homePage} 
+          style={{ width: "1000px", height: "auto" }}
+          alt="Dibujo de una chica con un ordenador y alrededor de ella hay iconos de tareas, relojes, etc."
+        />
       </div>
       <h2 id="caracteristicas">Características</h2>
       <div className="card-container row justify-content-center text-center">
