@@ -6,7 +6,7 @@ from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import psycopg2
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from functools import wraps
 #import jwt
 #import app
@@ -20,23 +20,6 @@ conn = psycopg2.connect(
      "postgres://begocg:PTzHQfYBqPxB3qWPEBvAJo7XNLWsF9Wf@dpg-cp3n8qvsc6pc73fscc00-a.oregon-postgres.render.com/example_f4zm"
  )
 cur = conn.cursor()
-
-# def token_required(f):
-#     @wraps(f)
-#     def decorated(*args, **kwargs):
-#         token = request.headers.get('Authorization')
-
-#         if not token:
-#             return jsonify({'message': 'Token is missing'}), 401
-
-#         try:
-#             data = jwt.decode(token, app.config['SECRET_KEY'])
-#         except:
-#             return jsonify({'message': 'Token is invalid'}), 401
-
-#         return f(*args, **kwargs)
-
-#     return decorated
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
