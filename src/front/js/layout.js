@@ -11,25 +11,24 @@ import injectContext from "./store/appContext";
 
 import { Footer } from "./component/footer";
 import { Navbar } from "./component/navbar/navbar";
+import { Navigate } from 'react-router-dom';
 
 //create your first component
+import { Navigate } from 'react-router-dom';
+
 const PrivateRoute = ({ element: Component, ...rest }) => {
-  // Check if localStorage is available and getItem is a function
   if (typeof localStorage !== 'undefined' && typeof localStorage.getItem === 'function') {
     const token = localStorage.getItem("jwt-token");
     if (!token) {
-      // Redirect to the home page if token doesn't exist
       return <Navigate to="/home" />;
     }
   } else {
-    // Handle the case when localStorage is not available
     console.error("localStorage is not available");
-    // Redirect to home or handle the situation accordingly
     return <Navigate to="/home" />;
   }
-  // Render the component if token exists
   return <Component {...rest} />;
 };
+
 const Layout = () => {
   //the basename is used when your project is published in a subdirectory and not in the root of the domain
   // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
