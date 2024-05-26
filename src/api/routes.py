@@ -71,17 +71,20 @@ def login(userData):
 
 
 @api.route('/users/<int:userId>', methods=['PUT'])
+@jwt_required()
 def update_user(userId):
     # Lógica para actualizar la información de un usuario existente
     return jsonify({"message": f"Update user with ID {userId}"}), 200
 
 @api.route('/users/<int:userId>', methods=['DELETE'])
+@jwt_required()
 def delete_user(userId):
     # Lógica para eliminar un usuario
     return jsonify({"message": f"User with ID {userId} deleted"}), 200
 
 
 @api.route('/tasks/<int:userId>', methods=['GET'])
+@jwt_required()
 def get_user_tasks(userId):
     listaTareas=[]
     cur.execute('SELECT * FROM tasks where "userId"= %s',(userId,))
@@ -92,7 +95,7 @@ def get_user_tasks(userId):
     return jsonify(listaTareas), 200
 
 @api.route('/tasks/<int:userId>', methods=['POST'])
-# @token_required
+@jwt_required()
 def create_task(userId):
     data = request.json
     description = data.get('description')
@@ -104,6 +107,7 @@ def create_task(userId):
     return jsonify({"message": f"Create task for user with ID {userId}", "description": data.get("description"), "duration": data.get("duration"), "deadline": data.get("deadline"), "type": data.get("type")}), 201
 
 @api.route('/tasks/<int:userId>/<int:taskId>', methods=['GET'])
+@jwt_required()
 def get_task(userId, taskId):
     cur.execute('SELECT * FROM tasks where "userId"= %s AND "taskId"= %s',(userId, taskId))
     task = cur.fetchone()
@@ -115,6 +119,7 @@ def get_task(userId, taskId):
 
 
 @api.route('/tasks/<int:userId>/<int:taskId>', methods=['PUT'])
+@jwt_required()
 def update_task(userId, taskId):
     data = request.json
     cur.execute('UPDATE tasks SET description=%s, deadline=%s, duration=%s, type=%s WHERE "userId"=%s AND "taskId"=%s',
@@ -124,6 +129,7 @@ def update_task(userId, taskId):
     
 
 @api.route('/tasks/<int:userId>/<int:taskId>', methods=['DELETE'])
+@jwt_required()
 def delete_task(userId, taskId):
     cur.execute('DELETE from tasks WHERE "userId"=%s AND "taskId"=%s', (userId, taskId))
     conn.commit()

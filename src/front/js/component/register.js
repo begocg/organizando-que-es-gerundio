@@ -7,7 +7,15 @@ const Register = ({ onRegistrationSuccess }) => {
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
 
-    
+    const validateEmail = (email) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
+    };
+
+    const validatePassword = (password) => {
+        const re = /^[a-zA-Z0-9]*$/;
+        return re.test(String(password));
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
