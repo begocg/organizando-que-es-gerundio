@@ -14,21 +14,15 @@ import { Navbar } from "./component/navbar/navbar";
 import { Navigate } from 'react-router-dom';
 
 //create your first component
-import { Navigate } from 'react-router-dom';
-
 const PrivateRoute = ({ element: Component, ...rest }) => {
   if (typeof localStorage !== 'undefined' && typeof localStorage.getItem === 'function') {
     const token = localStorage.getItem("jwt-token");
     if (!token) {
-      return <Navigate to="/home" />;
+      window.location.href = "/home";
+      return null;
     }
-  } else {
-    console.error("localStorage is not available");
-    return <Navigate to="/home" />;
-  }
   return <Component {...rest} />;
 };
-
 const Layout = () => {
   //the basename is used when your project is published in a subdirectory and not in the root of the domain
   // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
@@ -60,5 +54,6 @@ const Layout = () => {
     </div>
   );
 };
+}
 
 export default injectContext(Layout);
