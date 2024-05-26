@@ -13,15 +13,14 @@ import { Footer } from "./component/footer";
 import { Navbar } from "./component/navbar/navbar";
 
 //create your first component
-function PrivateRoute(){
+const PrivateRoute = ({ element: Component, ...rest }) => {
   const token = localStorage.getItem("jwt-token");
   if (!token()) {
-    console.log("entro en el if token")
-    replace ({
-      pathname: '/home',
-    })
+    console.log("entro en el if no token")
+    return <Navigate to="/home" />;
   }
-}
+  return <Component {...rest} />;
+};
 const Layout = () => {
   //the basename is used when your project is published in a subdirectory and not in the root of the domain
   // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
@@ -36,8 +35,14 @@ const Layout = () => {
           <Navbar />
           <Routes>
             <Route element={<Home />} path="/home" />
-            <Route element={<MyCalendar />} path="/calendar" onEnter={PrivateRoute} />
-            <Route element={<Profile />} path="/profile" onEnter={PrivateRoute} />
+            <Route
+              element={<PrivateRoute element={<MyCalendar />} />}
+              path="/calendar"
+            />
+            <Route
+              element={<PrivateRoute element={<Profile />} />}
+              path="/profile"
+            />
             <Route element={<Blank />} path="/notfound" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
