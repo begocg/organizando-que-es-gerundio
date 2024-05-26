@@ -1,11 +1,11 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import logo from "../../img/logo.png";
-import Login from "./login";
-import Popup from "./pop-up/pop-up";
-import Register from "./register";
-import NewTask from "./newTask";
+import logo from "../../../img/logo.png";
+import Login from "../login";
+import Popup from "../pop-up/pop-up";
+import Register from "../register";
+import NewTask from "../newTask";
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
