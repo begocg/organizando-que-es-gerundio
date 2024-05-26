@@ -16,10 +16,11 @@ const Login = ({ onLoginSuccess }) => {
         localStorage.setItem("userId", data.userId);
         onLoginSuccess();
       } else {
-        console.error("Credenciales inválidas.");
+        window.alert("Credenciales inválidas.");
       }
     } catch (error) {
       console.error("Error en la solicitud:", error);
+      window.alert("Ocurrió un error en la solicitud.");
     }
   };
 

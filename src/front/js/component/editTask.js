@@ -36,14 +36,11 @@ const EditTask = ({ initialTask }) => {
         console.log(response.json());
          window.location.href = "/calendar";
       } else {
-        // La solicitud falló, mostramos un mensaje de error
-        console.error("No se pudo registrar. Inténtelo de nuevo más tarde.");
+        window.alert("No se pudo registrar. Inténtelo de nuevo más tarde.");
       }
     } catch (error) {
-      // Error en la solicitud
-      console.error("Error en la solicitud:", error);
+      window.alert("Error en la solicitud:", error);
     }
-    // Limpia el formulario o reinicia el estado
   };
   const handleChange = (e) => {
     const { name, value } = e.target;

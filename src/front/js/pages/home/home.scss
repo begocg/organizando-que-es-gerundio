@@ -28,20 +28,29 @@ h2 {
     padding: 20px;
     flex-wrap: wrap;
   
+    .contact-text-left {
+        flex: 1 0 100%;
+    }
+
     form {
-      flex: 2;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
     }
   
     @media (max-width: 768px) {
-      flex-direction: column;
+        flex-direction: column;
   
-      .contact-form {
-        width: 100%
-    }
+        .contact-text-left {
+            width: 100%;
+        }
+
+        form {
+            width: 100%;
+        }
     }  
 }
+
   
   
