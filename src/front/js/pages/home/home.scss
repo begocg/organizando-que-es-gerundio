@@ -24,19 +24,15 @@ h2 {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 20px;  // Espacio entre el texto y el formulario
-    padding: 20px;  // Añadir un poco de padding para mejor apariencia
+    gap: 20px;
+    padding: 20px;
     flex-wrap: wrap;
-  
-    .contact-text-left {
-      flex: 1;  // Limita el ancho del texto en pantallas grandes
-    }
   
     form {
       flex: 2;
       display: flex;
       flex-direction: column;
-      gap: 10px;  // Espacio entre los campos del formulario
+      gap: 10px;
     }
   
     @media (max-width: 768px) {
