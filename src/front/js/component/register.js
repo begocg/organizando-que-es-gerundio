@@ -4,10 +4,27 @@ const Register = ({ onRegistrationSuccess }) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+
     
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!validateEmail(email)) {
+            setEmailError("Ingrese un correo electrónico válido.");
+            return;
+        }
+
+        // Validar contraseña
+        if (!validatePassword(password)) {
+            setPasswordError("La contraseña solo puede contener letras y números.");
+            return;
+        }
+
+        setEmailError("");
+        setPasswordError("");
+
         try {
             const response = await fetch('https://organizando-que-es-gerundio.onrender.com/api/users', {
                 method: 'POST',
@@ -38,7 +55,9 @@ const Register = ({ onRegistrationSuccess }) => {
         <form onSubmit={handleSubmit}>
             <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Usuario" required />
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico" required />
+            {emailError && <p style={{ color: "red" }}>{emailError}</p>}
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" required />
+            {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}
             <button type="submit">Registrarse</button>
         </form>
     );
