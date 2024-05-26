@@ -14,11 +14,20 @@ import { Navbar } from "./component/navbar/navbar";
 
 //create your first component
 const PrivateRoute = ({ element: Component, ...rest }) => {
-  const token = localStorage.getItem("jwt-token");
-  if (!token()) {
-    console.log("entro en el if no token")
+  // Check if localStorage is available and getItem is a function
+  if (typeof localStorage !== 'undefined' && typeof localStorage.getItem === 'function') {
+    const token = localStorage.getItem("jwt-token");
+    if (!token) {
+      // Redirect to the home page if token doesn't exist
+      return <Navigate to="/home" />;
+    }
+  } else {
+    // Handle the case when localStorage is not available
+    console.error("localStorage is not available");
+    // Redirect to home or handle the situation accordingly
     return <Navigate to="/home" />;
   }
+  // Render the component if token exists
   return <Component {...rest} />;
 };
 const Layout = () => {
