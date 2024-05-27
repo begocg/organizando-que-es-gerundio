@@ -13,15 +13,9 @@ import { Footer } from "./component/footer";
 import { Navbar } from "./component/navbar/navbar";
 
 //create your first component
-const PrivateRoute = ({ element: Component, ...rest }) => {
-  if (typeof localStorage !== 'undefined' && typeof localStorage.getItem === 'function') {
-    const token = localStorage.getItem("jwt-token");
-    if (!token) {
-      return <Navigate to="/home" />;
-    }
-    return <Component {...rest} />;
-  }
-  return null;
+const PrivateRoute = ({ element, ...rest }) => {
+  const token = localStorage.getItem("jwt-token");
+  return token ? element : <Navigate to="/home" />;
 };
 
 const Layout = () => {
