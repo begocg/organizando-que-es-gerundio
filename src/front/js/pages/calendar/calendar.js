@@ -30,7 +30,7 @@ export const MyCalendar = () => {
         const response = await fetch("https://organizando-que-es-gerundio.onrender.com/api/tasks/" + userId, {
           method: "GET",
           headers:{
-            'Authorization': 'Bearer ' + localStorage.getItem('jwt-token')// ⬅⬅⬅ authorization token}
+            'Authorization': 'Bearer ' + localStorage.getItem('jwt-token')
           }
         });
         if (response.ok) {
@@ -67,7 +67,13 @@ export const MyCalendar = () => {
   const handleEventClick = async (event) => { // Modificamos para obtener los detalles de la tarea
     try {
       const taskId = event.data.taskId;
-      const response = await fetch(`https://organizando-que-es-gerundio.onrender.com/api/tasks/${userId}/${taskId}`);
+      const response = await fetch(`https://organizando-que-es-gerundio.onrender.com/api/tasks/${userId}/${taskId}`, {
+        method: "GET",
+        headers:{
+          'Authorization': 'Bearer ' + localStorage.getItem('jwt-token')
+        }
+      });
+
       if (response.ok) {
         const taskData = await response.json();
         setSelectedTask(taskData);

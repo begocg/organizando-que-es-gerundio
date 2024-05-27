@@ -23,6 +23,7 @@ const EditTask = ({ initialTask }) => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': 'Bearer ' + localStorage.getItem('jwt-token'),
         },
         body: JSON.stringify({
           userId: userId,
@@ -54,6 +55,9 @@ const EditTask = ({ initialTask }) => {
 
       const response = await fetch("https://organizando-que-es-gerundio.onrender.com/api/tasks/" + userId + "/" + taskId, {
         method: "DELETE",
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('jwt-token'),
+        },
       });
       if (response.ok) {
         console.log(response.json());
