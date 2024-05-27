@@ -45,7 +45,8 @@ export const MyCalendar = () => {
               title: task.description,
               start: dayjs(deadlineDate).toDate(),
               end: dayjs(endate).toDate(),
-              data: {taskId: task.taskId}
+              data: {taskId: task.taskId},
+              type: task.type
             };
           });
           setEvents(listaEventos);
@@ -130,6 +131,27 @@ export const MyCalendar = () => {
           event: "Evento",
           noEventsInRange: "Sin eventos",
         }}
+
+        eventPropGetter={
+          (event) => {
+            let newStyle = {
+              color: 'black',
+              backgroundColor: "#7a6e51",
+              borderRadius: "0px",
+              border: "none"
+            };
+      
+            if (event.type){
+              newStyle.color = 'white',
+              newStyle.backgroundColor = "#29251c"
+            }
+      
+            return {
+              className: "",
+              style: newStyle
+            };
+          }
+        }
       />
 
       {/* Modal para mostrar el formulario de nueva tarea */}
