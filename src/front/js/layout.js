@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { BackendURL } from "./component/backendURL";
 import ScrollToTop from "./component/scrollToTop";
 
@@ -17,12 +17,12 @@ const PrivateRoute = ({ element: Component, ...rest }) => {
   if (typeof localStorage !== 'undefined' && typeof localStorage.getItem === 'function') {
     const token = localStorage.getItem("jwt-token");
     if (!token) {
-      window.location.href = "/home";
-      return null;
+      return <Navigate to="/home" />;
     }
-  return <Component {...rest} />;
+    return <Component {...rest} />;
+  }
+  return null;
 };
-}
 
 const Layout = () => {
   //the basename is used when your project is published in a subdirectory and not in the root of the domain
