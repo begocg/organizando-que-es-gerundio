@@ -30,7 +30,7 @@ export const MyCalendar = () => {
         const response = await fetch("https://organizando-que-es-gerundio.onrender.com/api/tasks/" + userId, {
           method: "GET",
           headers:{
-            'Authorization': 'Bearer ' + localStorage.getItem('token')// ⬅⬅⬅ authorization token}
+            'Authorization': 'Bearer ' + localStorage.getItem('jwt-token')// ⬅⬅⬅ authorization token}
           }
         });
         if (response.ok) {
