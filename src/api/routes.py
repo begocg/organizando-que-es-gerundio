@@ -12,7 +12,7 @@ from functools import wraps
 #import app
 
 api = Blueprint('api', __name__)
-jwt = JWTManager(api)
+
 # Allow CORS requests to this API
 CORS(api)
 
