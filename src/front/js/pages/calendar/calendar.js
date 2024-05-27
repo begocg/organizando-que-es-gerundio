@@ -27,7 +27,12 @@ export const MyCalendar = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch("https://organizando-que-es-gerundio.onrender.com/api/tasks/" + userId);
+        const response = await fetch("https://organizando-que-es-gerundio.onrender.com/api/tasks/" + userId, {
+          method: "GET",
+          headers:{
+            'Authorization': 'Bearer ' + localStorage.getItem('token')// ⬅⬅⬅ authorization token}
+          }
+        });
         if (response.ok) {
           const data = await response.json();
           const listaEventos = data.map((task) => {
