@@ -63,15 +63,15 @@ export const Profile = ({}) => {
         </div>
         <div>
           <label>Correo:</label>
-          <input type="email" name="email"onChange={handleChange}/>
+          <input type="email" name="email"defaultValue={user.email} onChange={handleChange}/>
         </div>
         <div>
           <label>Contraseña:</label>
-          <input type="password" name="password"onChange={handleChange}/>
+          <input type="password" name="password"defaultValue={user.password} onChange={handleChange}/>
         </div>
         <div>
           <label>Hora de inicio:</label>
-          <select name="startTime" onChange={handleChange}>
+          <select name="startTime" defaultValue={user.startTime} onChange={handleChange}>
             {horasDelDia.map((hora, index) => (
               <option key={index} value={hora}>
                 {hora}
@@ -81,7 +81,7 @@ export const Profile = ({}) => {
         </div>
         <div>
           <label>Hora de fin:</label>
-          <select name="endTime" onChange={handleChange}>
+          <select name="endTime" defaultValue={user.endTime} onChange={handleChange}>
             {horasDelDia.map((hora, index) => (
               <option key={index} value={hora}>
                 {hora}
