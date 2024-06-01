@@ -83,10 +83,10 @@ def delete_user(userId):
 @api.route('/userDetails/<int:userId>', methods=['GET'])
 @jwt_required()
 def get_user_details(userId):
-    cur.execute('SELECT * FROM users WHERE "userId" = %s', (userId))
+    cur.execute('SELECT * FROM users WHERE "userId" = %s', (userId,))
     user = cur.fetchone()
     if user:
-        return jsonify({ "username": str(user[1]), "password": str(user[2]), "email": str(user[3]), "startTime": user[4], "endTime": user[5] })
+        return jsonify({ "username": user[1], "password": str(user[2]), "email": str(user[3]), "startTime": user[4], "endTime": user[5] })
     else:
         return jsonify({"error": "Credenciales inválidas"}), 401
 
