@@ -48,9 +48,9 @@ export const Profile = ({}) => {
   };
 
   // Manejar envío del formulario
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Datos del formulario:", { nombre, correo, contraseña, horaInicio, horaFin });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Datos del formulario:" + user.startTime + user.endTime);
   };
 
   return (
