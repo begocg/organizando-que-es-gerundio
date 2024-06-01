@@ -72,10 +72,10 @@ const Register = ({ onRegistrationSuccess }) => {
     };
     return (
         <form onSubmit={handleSubmit}>
-            <input type="text" value={user.username} onChange={handleChange} placeholder="Usuario" required />
-            <input type="text" value={user.email} onChange={handleChange} placeholder="Correo electrónico" required />
+            <input type="text" name="username" value={user.username} onChange={handleChange} placeholder="Usuario" required />
+            <input type="text" name="email" value={user.email} onChange={handleChange} placeholder="Correo electrónico" required />
             {emailError && <p style={{ color: "red" }}>{emailError}</p>}
-            <input type="password" value={user.password} onChange={handleChange} placeholder="Contraseña" required />
+            <input type="password" name="password" value={user.password} onChange={handleChange} placeholder="Contraseña" required />
             {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}
             <button type="submit">Registrarse</button>
         </form>
