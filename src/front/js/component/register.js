@@ -1,9 +1,20 @@
 import React, { useState } from "react";
 
 const Register = ({ onRegistrationSuccess }) => {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [user, setUser] = useState({
+        username: '',
+        email: '',
+        password: '',
+        startTime: '',
+        endTime: ''
+
+    })
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUser({ ...user, [name]: value });
+    };
+
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
 
@@ -19,6 +30,7 @@ const Register = ({ onRegistrationSuccess }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const { username, email, password } = user;
         if (!validateEmail(email)) {
             setEmailError("Ingrese un correo electrónico válido.");
             return;
@@ -61,10 +73,10 @@ const Register = ({ onRegistrationSuccess }) => {
     };
     return (
         <form onSubmit={handleSubmit}>
-            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Usuario" required />
-            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Correo electrónico" required />
+            <input type="text" name="username" value={user.username} onChange={handleChange} placeholder="Usuario" required />
+            <input type="text" name="email" value={user.email} onChange={handleChange} placeholder="Correo electrónico" required />
             {emailError && <p style={{ color: "red" }}>{emailError}</p>}
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" required />
+            <input type="password" name="password" value={user.password} onChange={handleChange} placeholder="Contraseña" required />
             {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}
             <button type="submit">Registrarse</button>
         </form>

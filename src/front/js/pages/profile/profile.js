@@ -1,50 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../../styles/index.scss";
 
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "dayjs/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
-export const Profile = () => {
-	  // Estado para almacenar los valores de los campos
-  const [nombre, setNombre] = useState('');
-  const [correo, setCorreo] = useState('');
-  const [contraseña, setContraseña] = useState('');
-  const [horaInicio, setHoraInicio] = useState('');
-  const [horaFin, setHoraFin] = useState('');
+export const Profile = ({}) => {
+  const userId = localStorage.getItem("userId");
+  const [user, setUser] = useState();
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch("https://organizando-que-es-gerundio-pr-1.onrender.com/api/userDetails/" + userId, {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("jwt-token"),
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          console.log("LA DATAAAAAAAAAAAAAAAAAAAAAAAAAA ESSSS :"+data)
+          setUser(data);
+        } else {
+          console.error("Error en la respuesta");
+        }
+      } catch (error) {
+        console.error("Error en la solicitud:", error);
+      }
+    };
+
+    fetchEvents();
+  }, [userId]);
 
   const horasDelDia = [];
   for (let hora = 0; hora <= 23; hora++) {
-    const horaStr = hora.toString().padStart(2, '0'); // Asegura que la hora tenga dos dígitos (por ejemplo, '08' en lugar de '8')
+    const horaStr = hora.toString().padStart(2, "0"); // Asegura que la hora tenga dos dígitos (por ejemplo, '08' en lugar de '8')
     horasDelDia.push(`${horaStr}:00`);
   }
 
   // Funciones para manejar cambios en los campos
-  const handleNombreChange = (event) => {
-    setNombre(event.target.value);
-  };
-
-  const handleCorreoChange = (event) => {
-    setCorreo(event.target.value);
-  };
-
-  const handleContraseñaChange = (event) => {
-    setContraseña(event.target.value);
-  };
-
-  const handleHoraInicioChange = (event) => {
-    setHoraInicio(event.target.value);
-  };
-
-  const handleHoraFinChange = (event) => {
-    setHoraFin(event.target.value);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
   };
 
   // Manejar envío del formulario
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aquí podrías enviar los datos a tu servidor o hacer lo que necesites con ellos
-    console.log('Datos del formulario:', { nombre, correo, contraseña, horaInicio, horaFin });
+    console.log("Datos del formulario:", { nombre, correo, contraseña, horaInicio, horaFin });
   };
 
   return (
@@ -52,30 +55,34 @@ export const Profile = () => {
       <h1>Mi Perfil</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="nombre">Nombre:</label>
-          <input type="text" id="nombre" value={nombre} onChange={handleNombreChange} />
+          <label>Nombre:</label>
+          <input type="text" name="username"onChange={handleChange}/>
         </div>
         <div>
-          <label htmlFor="correo">Correo:</label>
-          <input type="email" id="correo" value={correo} onChange={handleCorreoChange} />
+          <label>Correo:</label>
+          <input type="email" name="email"onChange={handleChange}/>
         </div>
         <div>
-          <label htmlFor="contraseña">Contraseña:</label>
-          <input type="password" id="contraseña" value={contraseña} onChange={handleContraseñaChange} />
+          <label>Contraseña:</label>
+          <input type="password" name="password"onChange={handleChange}/>
         </div>
         <div>
-          <label htmlFor="horaInicio">Hora de inicio:</label>
-          <select id="horaInicio" value={horaInicio} onChange={handleHoraInicioChange}>
+          <label>Hora de inicio:</label>
+          <select name="startTime" onChange={handleChange}>
             {horasDelDia.map((hora, index) => (
-              <option key={index} value={hora}>{hora}</option>
+              <option key={index} value={hora}>
+                {hora}
+              </option>
             ))}
           </select>
         </div>
         <div>
-          <label htmlFor="horaFin">Hora de fin:</label>
-          <select id="horaFin" value={horaFin} onChange={handleHoraFinChange}>
+          <label>Hora de fin:</label>
+          <select name="endTime" onChange={handleChange}>
             {horasDelDia.map((hora, index) => (
-              <option key={index} value={hora}>{hora}</option>
+              <option key={index} value={hora}>
+                {hora}
+              </option>
             ))}
           </select>
         </div>
@@ -83,5 +90,4 @@ export const Profile = () => {
       </form>
     </div>
   );
-
 };

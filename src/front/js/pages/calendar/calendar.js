@@ -21,7 +21,7 @@ export const MyCalendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [events, setEvents] = useState([]);
   const [showNewTaskModal, setShowNewTaskModal] = useState(false);
-  const [selectedTask, setSelectedTask] = useState({}); // Estado para almacenar la tarea seleccionada
+  const [selectedTask, setSelectedTask] = useState({});
 
 
   useEffect(() => {
@@ -163,7 +163,7 @@ export const MyCalendar = () => {
         <EditTask initialTask={selectedTask}/>
         </Modal.Body>
         <Modal.Footer>
-          {/* Puedes añadir botones de acción en el pie del modal si es necesario */}
+          {}
         </Modal.Footer>
       </Modal>
 
