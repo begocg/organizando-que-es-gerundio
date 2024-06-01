@@ -7,7 +7,7 @@ import { useMediaQuery } from 'react-responsive';
 export const Blank = () => {
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
   return (
-    <div>
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "70vh" }}>
       <img
       src={isMobile ? blankMobile : blank}
       style={{ width: "80%", height: "auto" }}         
