@@ -20,6 +20,7 @@ export const Profile = ({}) => {
         if (response.ok) {
           const data = await response.json();
           console.log("LA DATAAAAAAAAAAAAAAAAAAAAAAAAAA ESSSS :"+data)
+          console.log(data.username)
           setUser(data);
         } else {
           console.error("Error en la respuesta");
