@@ -21,7 +21,7 @@ export const Profile = ({ initialUser }) => {
   // Funciones para manejar cambios en los campos
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setTask({ ...user, [name]: value });
+    setUser({ ...user, [name]: value });
   };
 
   // Manejar envío del formulario
