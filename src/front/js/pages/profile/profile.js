@@ -27,7 +27,6 @@ export const Profile = ({ initialUser }) => {
   // Manejar envío del formulario
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Aquí podrías enviar los datos a tu servidor o hacer lo que necesites con ellos
     console.log('Datos del formulario:', { nombre, correo, contraseña, horaInicio, horaFin });
   };
 
@@ -36,28 +35,28 @@ export const Profile = ({ initialUser }) => {
       <h1>Mi Perfil</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="nombre">Nombre:</label>
-          <input type="text" id="nombre" defaultValue={user.username} onChange={handleChange} />
+          <label>Nombre:</label>
+          <input type="text" name="username" defaultValue={user.username} onChange={handleChange} />
         </div>
         <div>
-          <label htmlFor="correo">Correo:</label>
-          <input type="email" id="correo" defaultValue={user.email} onChange={handleChange} />
+          <label>Correo:</label>
+          <input type="email" name="email" defaultValue={user.email} onChange={handleChange} />
         </div>
         <div>
-          <label htmlFor="contraseña">Contraseña:</label>
-          <input type="password" id="contraseña" defaultValue={user.password} onChange={handleChange} />
+          <label>Contraseña:</label>
+          <input type="password" name="password" defaultValue={user.password} onChange={handleChange} />
         </div>
         <div>
-          <label htmlFor="horaInicio">Hora de inicio:</label>
-          <select id="horaInicio" defaultValue={user.startTime} onChange={handleChange}>
+          <label>Hora de inicio:</label>
+          <select name="startTime" defaultValue={user.startTime} onChange={handleChange}>
             {horasDelDia.map((hora, index) => (
               <option key={index} value={hora}>{hora}</option>
             ))}
           </select>
         </div>
         <div>
-          <label htmlFor="horaFin">Hora de fin:</label>
-          <select id="horaFin" defaultValue={user.startEnd} onChange={handleChange}>
+          <label>Hora de fin:</label>
+          <select name="endTime" defaultValue={user.startEnd} onChange={handleChange}>
             {horasDelDia.map((hora, index) => (
               <option key={index} value={hora}>{hora}</option>
             ))}
