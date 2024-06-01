@@ -30,6 +30,7 @@ const Register = ({ onRegistrationSuccess }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const { username, email, password } = user;
         if (!validateEmail(email)) {
             setEmailError("Ingrese un correo electrónico válido.");
             return;
