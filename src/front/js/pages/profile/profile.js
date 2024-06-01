@@ -55,19 +55,19 @@ export const Profile = ({}) => {
       <form onSubmit={handleSubmit}>
         <div>
           <label>Nombre:</label>
-          <input type="text" name="username" defaultValue={user.username} onChange={handleChange} />
+          <input type="text" name="username"/>
         </div>
         <div>
           <label>Correo:</label>
-          <input type="email" name="email" defaultValue={user.email} onChange={handleChange} />
+          <input type="email" name="email"/>
         </div>
         <div>
           <label>Contraseña:</label>
-          <input type="password" name="password" defaultValue={user.password} onChange={handleChange} />
+          <input type="password" name="password"/>
         </div>
         <div>
           <label>Hora de inicio:</label>
-          <select name="startTime" defaultValue={user.startTime} onChange={handleChange}>
+          <select name="startTime">
             {horasDelDia.map((hora, index) => (
               <option key={index} value={hora}>
                 {hora}
@@ -77,7 +77,7 @@ export const Profile = ({}) => {
         </div>
         <div>
           <label>Hora de fin:</label>
-          <select name="endTime" defaultValue={user.startEnd} onChange={handleChange}>
+          <select name="endTime" >
             {horasDelDia.map((hora, index) => (
               <option key={index} value={hora}>
                 {hora}
