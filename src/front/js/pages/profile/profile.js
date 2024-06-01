@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../../styles/index.scss";
 
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "dayjs/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
-export const Profile = () => {
-	  // Estado para almacenar los valores de los campos
-  const [nombre, setNombre] = useState('');
-  const [correo, setCorreo] = useState('');
-  const [contraseña, setContraseña] = useState('');
-  const [horaInicio, setHoraInicio] = useState('');
-  const [horaFin, setHoraFin] = useState('');
+export const Profile = ({ initialUser }) => {
+  const [user, setUser] = useState(initialUser);
+
+  useEffect(() => {
+    setUser(initialUser);
+  }, [initialUser]);
 
   const horasDelDia = [];
   for (let hora = 0; hora <= 23; hora++) {
@@ -20,24 +19,9 @@ export const Profile = () => {
   }
 
   // Funciones para manejar cambios en los campos
-  const handleNombreChange = (event) => {
-    setNombre(event.target.value);
-  };
-
-  const handleCorreoChange = (event) => {
-    setCorreo(event.target.value);
-  };
-
-  const handleContraseñaChange = (event) => {
-    setContraseña(event.target.value);
-  };
-
-  const handleHoraInicioChange = (event) => {
-    setHoraInicio(event.target.value);
-  };
-
-  const handleHoraFinChange = (event) => {
-    setHoraFin(event.target.value);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setTask({ ...user, [name]: value });
   };
 
   // Manejar envío del formulario
@@ -53,19 +37,19 @@ export const Profile = () => {
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="nombre">Nombre:</label>
-          <input type="text" id="nombre" value={nombre} onChange={handleNombreChange} />
+          <input type="text" id="nombre" defaultValue={user.username} onChange={handleChange} />
         </div>
         <div>
           <label htmlFor="correo">Correo:</label>
-          <input type="email" id="correo" value={correo} onChange={handleCorreoChange} />
+          <input type="email" id="correo" defaultValue={user.email} onChange={handleChange} />
         </div>
         <div>
           <label htmlFor="contraseña">Contraseña:</label>
-          <input type="password" id="contraseña" value={contraseña} onChange={handleContraseñaChange} />
+          <input type="password" id="contraseña" defaultValue={user.password} onChange={handleChange} />
         </div>
         <div>
           <label htmlFor="horaInicio">Hora de inicio:</label>
-          <select id="horaInicio" value={horaInicio} onChange={handleHoraInicioChange}>
+          <select id="horaInicio" defaultValue={user.startTime} onChange={handleChange}>
             {horasDelDia.map((hora, index) => (
               <option key={index} value={hora}>{hora}</option>
             ))}
@@ -73,7 +57,7 @@ export const Profile = () => {
         </div>
         <div>
           <label htmlFor="horaFin">Hora de fin:</label>
-          <select id="horaFin" value={horaFin} onChange={handleHoraFinChange}>
+          <select id="horaFin" defaultValue={user.startEnd} onChange={handleChange}>
             {horasDelDia.map((hora, index) => (
               <option key={index} value={hora}>{hora}</option>
             ))}
