@@ -55,7 +55,7 @@ export const Profile = ({}) => {
       <form onSubmit={handleSubmit}>
         <div>
           <label>Nombre:</label>
-          <input type="text" name="username"/>
+          <input type="text" name="username" onChange={handleChange}/>
         </div>
         <div>
           <label>Correo:</label>
