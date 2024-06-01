@@ -7,7 +7,7 @@ import "dayjs/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
 export const Profile = ({}) => {
   const userId = localStorage.getItem("userId");
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({});
   useEffect(() => {
     const fetchEvents = async () => {
       try {
