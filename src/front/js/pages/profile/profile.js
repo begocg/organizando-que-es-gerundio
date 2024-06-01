@@ -5,16 +5,35 @@ import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "dayjs/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
-export const Profile = ({ initialUser }) => {
-  const [user, setUser] = useState(initialUser);
-
+export const Profile = ({}) => {
+  const userId = localStorage.getItem("userId");
+  const [user, setUser] = useState();
   useEffect(() => {
-    setUser(initialUser);
-  }, [initialUser]);
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch("https://organizando-que-es-gerundio.onrender.com/api/userDetails/" + userId, {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("jwt-token"),
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setUser(data);
+        } else {
+          console.error("Error en la respuesta");
+        }
+      } catch (error) {
+        console.error("Error en la solicitud:", error);
+      }
+    };
+
+    fetchEvents();
+  }, [userId]);
 
   const horasDelDia = [];
   for (let hora = 0; hora <= 23; hora++) {
-    const horaStr = hora.toString().padStart(2, '0'); // Asegura que la hora tenga dos dígitos (por ejemplo, '08' en lugar de '8')
+    const horaStr = hora.toString().padStart(2, "0"); // Asegura que la hora tenga dos dígitos (por ejemplo, '08' en lugar de '8')
     horasDelDia.push(`${horaStr}:00`);
   }
 
@@ -27,7 +46,7 @@ export const Profile = ({ initialUser }) => {
   // Manejar envío del formulario
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Datos del formulario:', { nombre, correo, contraseña, horaInicio, horaFin });
+    console.log("Datos del formulario:", { nombre, correo, contraseña, horaInicio, horaFin });
   };
 
   return (
@@ -50,7 +69,9 @@ export const Profile = ({ initialUser }) => {
           <label>Hora de inicio:</label>
           <select name="startTime" defaultValue={user.startTime} onChange={handleChange}>
             {horasDelDia.map((hora, index) => (
-              <option key={index} value={hora}>{hora}</option>
+              <option key={index} value={hora}>
+                {hora}
+              </option>
             ))}
           </select>
         </div>
@@ -58,7 +79,9 @@ export const Profile = ({ initialUser }) => {
           <label>Hora de fin:</label>
           <select name="endTime" defaultValue={user.startEnd} onChange={handleChange}>
             {horasDelDia.map((hora, index) => (
-              <option key={index} value={hora}>{hora}</option>
+              <option key={index} value={hora}>
+                {hora}
+              </option>
             ))}
           </select>
         </div>
@@ -66,5 +89,4 @@ export const Profile = ({ initialUser }) => {
       </form>
     </div>
   );
-
 };

@@ -9,6 +9,7 @@ import NewTask from "../newTask";
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
+
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -25,6 +26,7 @@ export const Navbar = () => {
   };
 
   const handleMyProfile = () => {
+
     window.location.href = "/profile";
   };
 
