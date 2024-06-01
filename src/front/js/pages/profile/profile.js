@@ -11,7 +11,7 @@ export const Profile = ({}) => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch("https://organizando-que-es-gerundio-pr-1.onrender.com/api/userDetails/" + userId, {
+        const response = await fetch("https://organizando-que-es-gerundio.onrender.com/api/userDetails/" + userId, {
           method: "GET",
           headers: {
             Authorization: "Bearer " + localStorage.getItem("jwt-token"),
