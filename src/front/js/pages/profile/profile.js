@@ -11,7 +11,7 @@ export const Profile = ({}) => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch("https://organizando-que-es-gerundio.onrender.com/api/userDetails/" + userId, {
+        const response = await fetch("https://organizando-que-es-gerundio-pr-1.onrender.com/api/userDetails/" + userId, {
           method: "GET",
           headers: {
             Authorization: "Bearer " + localStorage.getItem("jwt-token"),
@@ -19,6 +19,7 @@ export const Profile = ({}) => {
         });
         if (response.ok) {
           const data = await response.json();
+          console.log("LA DATAAAAAAAAAAAAAAAAAAAAAAAAAA ESSSS :"+data)
           setUser(data);
         } else {
           console.error("Error en la respuesta");
@@ -55,19 +56,19 @@ export const Profile = ({}) => {
       <form onSubmit={handleSubmit}>
         <div>
           <label>Nombre:</label>
-          <input type="text" name="username" onChange={handleChange}/>
+          <input type="text" name="username" defaultValue={user.username} onChange={handleChange}/>
         </div>
         <div>
           <label>Correo:</label>
-          <input type="email" name="email"/>
+          <input type="email" name="email"onChange={handleChange}/>
         </div>
         <div>
           <label>Contraseña:</label>
-          <input type="password" name="password"/>
+          <input type="password" name="password"onChange={handleChange}/>
         </div>
         <div>
           <label>Hora de inicio:</label>
-          <select name="startTime">
+          <select name="startTime" onChange={handleChange}>
             {horasDelDia.map((hora, index) => (
               <option key={index} value={hora}>
                 {hora}
@@ -77,7 +78,7 @@ export const Profile = ({}) => {
         </div>
         <div>
           <label>Hora de fin:</label>
-          <select name="endTime" >
+          <select name="endTime" onChange={handleChange}>
             {horasDelDia.map((hora, index) => (
               <option key={index} value={hora}>
                 {hora}
