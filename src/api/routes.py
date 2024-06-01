@@ -71,8 +71,9 @@ def login(userData):
 @api.route('/users/<int:userId>', methods=['PUT'])
 @jwt_required()
 def update_user(userId):
+    data = request.json
     # Lógica para actualizar la información de un usuario existente
-    return jsonify({"message": f"Update user with ID {userId}"}), 200
+    return jsonify({"message": data}), 200
 
 @api.route('/users/<int:userId>', methods=['DELETE'])
 @jwt_required()

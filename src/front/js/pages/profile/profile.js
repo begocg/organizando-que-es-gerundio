@@ -19,11 +19,11 @@ export const Profile = ({}) => {
         });
         if (response.ok) {
           const data = await response.json();
-          console.log("LA DATAAAAAAAAAAAAAAAAAAAAAAAAAA ESSSS :"+data)
-          console.log(data.username)
+          console.log("LA DATAAAAAAAAAAAAAAAAAAAAAAAAAA ESSSS :" + data);
+          console.log(data.username);
           setUser(data);
-          console.log(user)
-          console.log(user.username)
+          console.log(user);
+          console.log(user.username);
         } else {
           console.error("Error en la respuesta");
         }
@@ -50,7 +50,31 @@ export const Profile = ({}) => {
   // Manejar envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Datos del formulario:" + user.startTime + user.endTime);
+    try {
+      const userId = localStorage.getItem("userId");
+      const response = await fetch("https://organizando-que-es-gerundio.onrender.com/api/users/" + userId, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("jwt-token"),
+        },
+        body: JSON.stringify({
+          username: user.username,
+          email: user.email,
+          password: user.password,
+          startTime: user.startTime + ":00",
+          endTime: user.endTime + ":00",
+        }),
+      });
+      if (response.ok) {
+        console.log(response.json());
+        window.location.href = "/profile";
+      } else {
+        window.alert("No se pudo registrar. Inténtelo de nuevo más tarde.");
+      }
+    } catch (error) {
+      window.alert("Error en la solicitud:", error);
+    }
   };
 
   return (
@@ -59,15 +83,15 @@ export const Profile = ({}) => {
       <form onSubmit={handleSubmit}>
         <div>
           <label>Nombre:</label>
-          <input type="text" name="username"defaultValue={user.username}  onChange={handleChange}/>
+          <input type="text" name="username" defaultValue={user.username} onChange={handleChange} />
         </div>
         <div>
           <label>Correo:</label>
-          <input type="email" name="email"defaultValue={user.email} onChange={handleChange}/>
+          <input type="email" name="email" defaultValue={user.email} onChange={handleChange} />
         </div>
         <div>
           <label>Contraseña:</label>
-          <input type="password" name="password"defaultValue={user.password} onChange={handleChange}/>
+          <input type="password" name="password" defaultValue={user.password} onChange={handleChange} />
         </div>
         <div>
           <label>Hora de inicio:</label>
