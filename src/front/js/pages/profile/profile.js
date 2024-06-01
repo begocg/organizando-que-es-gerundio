@@ -22,6 +22,8 @@ export const Profile = ({}) => {
           console.log("LA DATAAAAAAAAAAAAAAAAAAAAAAAAAA ESSSS :"+data)
           console.log(data.username)
           setUser(data);
+          console.log(user)
+          console.log(user.username)
         } else {
           console.error("Error en la respuesta");
         }
@@ -57,7 +59,7 @@ export const Profile = ({}) => {
       <form onSubmit={handleSubmit}>
         <div>
           <label>Nombre:</label>
-          <input type="text" name="username"onChange={handleChange}/>
+          <input type="text" name="username"defaultValue={user.username}  onChange={handleChange}/>
         </div>
         <div>
           <label>Correo:</label>
