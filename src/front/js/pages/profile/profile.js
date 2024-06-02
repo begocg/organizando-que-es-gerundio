@@ -21,6 +21,8 @@ export const Profile = ({}) => {
           const data = await response.json();
           console.log("LA DATAAAAAAAAAAAAAAAAAAAAAAAAAA ESSSS :" + data);
           console.log(data.username);
+          data.startTime = data.startTime.split(':').slice(0, 2).join(':')
+          data.endTime = data.endTime.split(':').slice(0, 2).join(':')
           setUser(data);
           console.log(user);
           console.log(user.username);
