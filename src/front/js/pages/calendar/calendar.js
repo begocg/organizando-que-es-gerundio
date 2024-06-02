@@ -82,9 +82,15 @@ export const MyCalendar = () => {
       console.error("Error en la solicitud:", error);
     }
   };
-
-  fetchEvents();
-  fetchUserDetails();
+  async function executeAsyncFunctions() {
+    try {
+        await fetchEvents();
+        await fetchUserDetails();
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+}
+executeAsyncFunctions()
 }, [userId]);
 
   const handleDateChange = (date) => {
