@@ -8,7 +8,6 @@ import "react-datepicker/dist/react-datepicker.css";
 export const Profile = ({}) => {
   const userId = localStorage.getItem("userId");
   const [user, setUser] = useState({});
-  var data = {}
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
@@ -19,14 +18,12 @@ export const Profile = ({}) => {
           },
         });
         if (response.ok) {
-          data = await response.json();
+          const data = await response.json();
           console.log("LA DATAAAAAAAAAAAAAAAAAAAAAAAAAA ESSSS :" + data);
           console.log(data.username);
           data.startTime = data.startTime.split(':').slice(0, 2).join(':')
           data.endTime = data.endTime.split(':').slice(0, 2).join(':')
-
           console.log(data)
-
           setUser(data);
           console.log(user);
           console.log(user.username);
@@ -99,7 +96,7 @@ export const Profile = ({}) => {
         </div>
         <div>
           <label>Hora de inicio:</label>
-          <select name="startTime" defaultValue={data.startTime} onChange={handleChange}>
+          <select name="startTime" defaultValue={user.startTime} onChange={handleChange}>
             {horasDelDia.map((hora, index) => (
               <option key={index} value={hora}>
                 {hora}
@@ -109,7 +106,7 @@ export const Profile = ({}) => {
         </div>
         <div>
           <label>Hora de fin:</label>
-          <select name="endTime" defaultValue={data.endTime} onChange={handleChange}>
+          <select name="endTime" defaultValue={user.endTime} onChange={handleChange}>
             {horasDelDia.map((hora, index) => (
               <option key={index} value={hora}>
                 {hora}
