@@ -23,6 +23,9 @@ export const Profile = ({}) => {
           console.log(data.username);
           data.startTime = data.startTime.split(':').slice(0, 2).join(':')
           data.endTime = data.endTime.split(':').slice(0, 2).join(':')
+
+          console.log(data)
+
           setUser(data);
           console.log(user);
           console.log(user.username);
