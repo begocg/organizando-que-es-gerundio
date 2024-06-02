@@ -134,8 +134,8 @@ export const MyCalendar = () => {
         events={events}
         views={["week", "day", "agenda"]}
         defaultView="week"
-        min={dayjs("2023-12-23T" + {startTime}).toDate()}
-        max={dayjs("2023-12-23T" + {endTime}).toDate()}
+        min={dayjs(`2023-12-23T${startTime}`).toDate()}
+        max={dayjs(`2023-12-23T${endTime}`).toDate()}
         formats={{
           dayHeaderFormat: (date) => {
             return dayjs(date).format("dddd, DD/MM");
