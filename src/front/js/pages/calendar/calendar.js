@@ -23,8 +23,8 @@ export const MyCalendar = () => {
   const [showNewTaskModal, setShowNewTaskModal] = useState(false);
   const [selectedTask, setSelectedTask] = useState({});
   const [user, setUser] = useState({});
-  const [startTime, setStartTime] = useState("08:00");
-  const [endTime, setEndTime] = useState("17:00");
+  const [startTime, setStartTime] = useState("08:00:00");
+  const [endTime, setEndTime] = useState("17:00:00");
 
 
   useEffect(() => {
