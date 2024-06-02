@@ -22,7 +22,7 @@ export const MyCalendar = () => {
   const [events, setEvents] = useState([]);
   const [showNewTaskModal, setShowNewTaskModal] = useState(false);
   const [selectedTask, setSelectedTask] = useState({});
-  const [user, setUser] = useState({});
+
   const [startTime, setStartTime] = useState("08:00:00");
   const [endTime, setEndTime] = useState("17:00:00");
 
@@ -73,11 +73,8 @@ export const MyCalendar = () => {
         const data = await response.json();
         console.log("LA DATAAAAAAAAAAAAAAAAAAAAAAAAAA ESSSS :" + data);
         console.log(data.username);
-        setUser(data);
-        setStartTime(user.startTime);
-        setEndTime(user.endTime)
-        console.log(user);
-        console.log(user.startTime);
+        setStartTime(data.startTime);
+        setEndTime(data.endTime)
       } else {
         console.error("Error en la respuesta");
       }
