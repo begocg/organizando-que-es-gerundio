@@ -9,7 +9,7 @@ export const Profile = ({}) => {
   const userId = localStorage.getItem("userId");
   const [user, setUser] = useState({});
   useEffect(() => {
-    const fetchEvents = async () => {
+    const fetchUserDetails = async () => {
       try {
         const response = await fetch("https://organizando-que-es-gerundio.onrender.com/api/userDetails/" + userId, {
           method: "GET",
@@ -32,22 +32,20 @@ export const Profile = ({}) => {
       }
     };
 
-    fetchEvents();
+    fetchUserDetails();
   }, [userId]);
 
   const horasDelDia = [];
   for (let hora = 0; hora <= 23; hora++) {
-    const horaStr = hora.toString().padStart(2, "0"); // Asegura que la hora tenga dos dígitos (por ejemplo, '08' en lugar de '8')
+    const horaStr = hora.toString().padStart(2, "0");
     horasDelDia.push(`${horaStr}:00`);
   }
 
-  // Funciones para manejar cambios en los campos
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
 
-  // Manejar envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

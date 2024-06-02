@@ -72,14 +72,10 @@ def login(userData):
 @jwt_required()
 def update_user(userId):
     data = request.json
-    # Lógica para actualizar la información de un usuario existente
-    return jsonify({"message": data}), 200
-
-@api.route('/users/<int:userId>', methods=['DELETE'])
-@jwt_required()
-def delete_user(userId):
-    # Lógica para eliminar un usuario
-    return jsonify({"message": f"User with ID {userId} deleted"}), 200
+    cur.execute('UPDATE users SET email=%s, endTime=%s, password=%s, startTime=%s, username=%s WHERE "userId"=%s',
+                    (data.get('email'), data.get('endTime'), data.get('password'), data.get('starTime'), data.get('username'), userId))
+    conn.commit()
+    return jsonify({"data": data}), 200
 
 @api.route('/userDetails/<int:userId>', methods=['GET'])
 @jwt_required()

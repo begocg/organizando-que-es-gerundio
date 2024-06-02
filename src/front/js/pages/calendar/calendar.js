@@ -22,6 +22,9 @@ export const MyCalendar = () => {
   const [events, setEvents] = useState([]);
   const [showNewTaskModal, setShowNewTaskModal] = useState(false);
   const [selectedTask, setSelectedTask] = useState({});
+  const [user, setUser] = useState({});
+  const [startTime, setStartTime] = useState("08:00");
+  const [endTime, setEndTime] = useState("17:00");
 
 
   useEffect(() => {
@@ -58,8 +61,34 @@ export const MyCalendar = () => {
       }
     };
 
-    fetchEvents();
-  }, [userId]);
+  const fetchUserDetails = async () => {
+    try {
+      const response = await fetch("https://organizando-que-es-gerundio.onrender.com/api/userDetails/" + userId, {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("jwt-token"),
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log("LA DATAAAAAAAAAAAAAAAAAAAAAAAAAA ESSSS :" + data);
+        console.log(data.username);
+        setUser(data);
+        setStartTime(user.startTime);
+        setEndTime(user.endTime)
+        console.log(user);
+        console.log(user.startTime);
+      } else {
+        console.error("Error en la respuesta");
+      }
+    } catch (error) {
+      console.error("Error en la solicitud:", error);
+    }
+  };
+
+  fetchEvents();
+  fetchUserDetails();
+}, [userId]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -105,8 +134,8 @@ export const MyCalendar = () => {
         events={events}
         views={["week", "day", "agenda"]}
         defaultView="week"
-        min={dayjs("2023-12-23T08:00:00").toDate()}
-        max={dayjs("2023-12-23T18:00:00").toDate()}
+        min={dayjs("2023-12-23T" + {startTime}).toDate()}
+        max={dayjs("2023-12-23T" + {endTime}).toDate()}
         formats={{
           dayHeaderFormat: (date) => {
             return dayjs(date).format("dddd, DD/MM");
