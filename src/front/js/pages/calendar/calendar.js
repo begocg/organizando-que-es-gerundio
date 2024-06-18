@@ -75,8 +75,10 @@ export const MyCalendar = () => {
         console.log(data.username);
         console.log(data);
         console.log(data.startTime);
-        if(data.startTime && data.endTime){
+        if(data.startTime !== "None"){
           setStartTime(data.startTime);
+        }
+        if(data.endTime !== "None"){
           setEndTime(data.endTime)
         }
       } else {
