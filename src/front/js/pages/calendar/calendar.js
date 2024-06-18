@@ -73,6 +73,8 @@ export const MyCalendar = () => {
         const data = await response.json();
         console.log("LA DATAAAAAAAAAAAAAAAAAAAAAAAAAA ESSSS :" + data);
         console.log(data.username);
+        console.log(data);
+        console.log(data.startTime);
         if(data.startTime && data.endTime){
           setStartTime(data.startTime);
           setEndTime(data.endTime)
